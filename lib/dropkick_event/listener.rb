@@ -4,7 +4,7 @@ module Dropkick
 
     class << self
       def listens_for(*klasses)
-        klasses.each{|klass| klass.send :add_listener, self.new }
+        klasses.each{|klass| eval(klass.to_s.classify).send :add_listener, self.to_s }
       end
     end
 

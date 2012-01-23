@@ -5,14 +5,13 @@ module Dropkick
     class << self
       attr_accessor :class_listeners
       def add_listener(klass)
-        puts klass.inspect
         @class_listeners ||=  []
         @class_listeners << klass
         @class_listeners
       end
 
       def class_listeners
-        @class_listeners || []
+        defined?(@class_listeners) ? @class_listeners.collect{|x| eval(x).new} : []
       end
 
     end
